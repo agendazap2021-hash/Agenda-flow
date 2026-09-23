@@ -76,23 +76,27 @@
       <!-- Form: Criar Conta -->
       <form id="form-register" onsubmit="handleRegister(event)" class="space-y-3.5 text-xs">
         <div>
-          <label class="block font-bold mb-1 text-slate-700 dark:text-slate-300">Seu Nome Completo *</label>
-          <input type="text" id="reg-name" required="" placeholder="Ex: João da Silva" class="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none">
+          <div class="flex items-center justify-between mb-1">
+            <label class="block font-bold text-slate-700 dark:text-slate-300">Seu Nome Completo *</label>
+            <span class="text-[10px] text-slate-400" id="reg-name-counter">0/100</span>
+          </div>
+          <input type="text" id="reg-name" required="" maxlength="100" oninput="formatNameInput(this, &#39;reg-name-counter&#39;)" placeholder="Ex: João da Silva" class="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none">
         </div>
 
         <div>
           <label class="block font-bold mb-1 text-slate-700 dark:text-slate-300">Seu WhatsApp (com DDD) *</label>
-          <input type="tel" id="reg-phone" required="" placeholder="Ex: (11) 98765-4321" class="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none">
+          <input type="tel" id="reg-phone" required="" maxlength="15" oninput="maskPhoneInput(this)" placeholder="(11) 98765-4321" class="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none">
+          <span class="text-[10px] text-slate-400 mt-0.5 block">Apenas números (DDD + 9 dígitos)</span>
         </div>
 
         <div>
           <label class="block font-bold mb-1 text-slate-700 dark:text-slate-300">Seu E-mail *</label>
-          <input type="email" id="reg-email" required="" placeholder="joao@exemplo.com" class="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none">
+          <input type="email" id="reg-email" required="" maxlength="100" placeholder="joao@exemplo.com" class="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none">
         </div>
 
         <div>
           <label class="block font-bold mb-1 text-slate-700 dark:text-slate-300">Crie uma Senha *</label>
-          <input type="password" id="reg-password" required="" placeholder="Sua senha de acesso" class="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none">
+          <input type="password" id="reg-password" required="" minlength="4" maxlength="32" placeholder="Mínimo 4 caracteres" class="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none">
         </div>
 
         <button type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm rounded-xl shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98">
@@ -361,8 +365,11 @@
       </div>
       <form onsubmit="saveAppointment(event)" class="space-y-3 text-xs">
         <div>
-          <label class="block font-semibold mb-1">Título do Compromisso *</label>
-          <input type="text" id="apt-title" required="" placeholder="Ex: Atendimento, Consulta, Reunião" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+          <div class="flex items-center justify-between mb-1">
+            <label class="block font-semibold">Título do Compromisso *</label>
+            <span class="text-[10px] text-slate-400" id="apt-title-counter">0/100</span>
+          </div>
+          <input type="text" id="apt-title" required="" maxlength="100" oninput="formatNameInput(this, &#39;apt-title-counter&#39;)" placeholder="Ex: Atendimento, Consulta, Reunião" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
         </div>
         <div class="grid grid-cols-2 gap-2">
           <div>
@@ -391,15 +398,15 @@
         </div>
         <div>
           <label class="block font-semibold mb-1">Nome do Cliente</label>
-          <input type="text" id="apt-client-name" placeholder="Ex: Maria Fernandes" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+          <input type="text" id="apt-client-name" maxlength="100" placeholder="Ex: Maria Fernandes" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
         </div>
         <div>
           <label class="block font-semibold mb-1">WhatsApp do Cliente</label>
-          <input type="tel" id="apt-client-phone" placeholder="Ex: 11987654321" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+          <input type="tel" id="apt-client-phone" maxlength="15" oninput="maskPhoneInput(this)" placeholder="(11) 98765-4321" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
         </div>
         <div>
           <label class="block font-semibold mb-1">Local / Endereço / Link</label>
-          <input type="text" id="apt-location" placeholder="Ex: Consultório, Google Meet" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+          <input type="text" id="apt-location" maxlength="150" placeholder="Ex: Consultório, Google Meet" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
         </div>
         <div class="flex items-center justify-end gap-2 pt-2">
           <button type="button" onclick="closeModal(&#39;modal-appointment&#39;)" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-semibold">Cancelar</button>
@@ -418,8 +425,11 @@
       </div>
       <form onsubmit="saveTask(event)" class="space-y-3 text-xs">
         <div>
-          <label class="block font-semibold mb-1">O que precisa ser feito? *</label>
-          <input type="text" id="task-title" required="" placeholder="Ex: Enviar orçamento, ligar para fornecedor" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+          <div class="flex items-center justify-between mb-1">
+            <label class="block font-semibold">O que precisa ser feito? *</label>
+            <span class="text-[10px] text-slate-400" id="task-title-counter">0/100</span>
+          </div>
+          <input type="text" id="task-title" required="" maxlength="100" oninput="formatNameInput(this, &#39;task-title-counter&#39;)" placeholder="Ex: Enviar orçamento, ligar para fornecedor" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
         </div>
         <div class="grid grid-cols-2 gap-2">
           <div>
@@ -452,20 +462,23 @@
       </div>
       <form onsubmit="saveClient(event)" class="space-y-3 text-xs">
         <div>
-          <label class="block font-semibold mb-1">Nome Completo *</label>
-          <input type="text" id="client-name" required="" placeholder="Nome do cliente" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+          <div class="flex items-center justify-between mb-1">
+            <label class="block font-semibold">Nome Completo *</label>
+            <span class="text-[10px] text-slate-400" id="client-name-counter">0/100</span>
+          </div>
+          <input type="text" id="client-name" required="" maxlength="100" oninput="formatNameInput(this, &#39;client-name-counter&#39;)" placeholder="Nome do cliente" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
         </div>
         <div>
           <label class="block font-semibold mb-1">WhatsApp / Telefone</label>
-          <input type="tel" id="client-phone" placeholder="Ex: 11987654321" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+          <input type="tel" id="client-phone" maxlength="15" oninput="maskPhoneInput(this)" placeholder="(11) 98765-4321" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
         </div>
         <div>
           <label class="block font-semibold mb-1">E-mail</label>
-          <input type="email" id="client-email" placeholder="cliente@exemplo.com" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
+          <input type="email" id="client-email" maxlength="100" placeholder="cliente@exemplo.com" class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
         </div>
         <div>
           <label class="block font-semibold mb-1">Observações</label>
-          <textarea id="client-notes" rows="2" placeholder="Histórico, preferências ou anotações..." class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"></textarea>
+          <textarea id="client-notes" rows="2" maxlength="300" placeholder="Histórico, preferências ou anotações..." class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"></textarea>
         </div>
         <div class="flex items-center justify-end gap-2 pt-2">
           <button type="button" onclick="closeModal(&#39;modal-client&#39;)" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-semibold">Cancelar</button>
@@ -506,6 +519,42 @@
 
     function getToday() {
       return new Date().toISOString().slice(0, 10);
+    }
+
+    // FORMATAÇÃO E MÁSCARAS AUTOMÁTICAS
+    function maskPhoneInput(input) {
+      // Aceita apenas números
+      let digits = input.value.replace(/\D/g, '');
+      if (digits.length > 11) digits = digits.slice(0, 11);
+
+      if (digits.length === 0) {
+        input.value = '';
+      } else if (digits.length <= 2) {
+        input.value = `(${digits}`;
+      } else if (digits.length <= 6) {
+        input.value = `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+      } else if (digits.length <= 10) {
+        input.value = `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+      } else {
+        input.value = `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7, 11)}`;
+      }
+    }
+
+    function formatNameInput(input, counterId) {
+      if (input.value.length > 100) {
+        input.value = input.value.slice(0, 100);
+      }
+      if (counterId) {
+        const counterEl = document.getElementById(counterId);
+        if (counterEl) {
+          counterEl.textContent = `${input.value.length}/100`;
+        }
+      }
+    }
+
+    function isValidEmail(email) {
+      const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return re.test(email);
     }
 
     // Carregar banco de usuários (todos os cadastros salvos)
@@ -621,9 +670,34 @@
       e.preventDefault();
       hideAlert();
       const name = document.getElementById('reg-name').value.trim();
-      const phone = document.getElementById('reg-phone').value.trim();
+      const rawPhone = document.getElementById('reg-phone').value;
+      const phoneDigits = rawPhone.replace(/\D/g, '');
       const email = document.getElementById('reg-email').value.trim().toLowerCase();
       const password = document.getElementById('reg-password').value;
+
+      if (!name || name.length < 3) {
+        showAlert('Por favor, informe seu nome completo (mínimo 3 caracteres).');
+        return;
+      }
+      if (name.length > 100) {
+        showAlert('O nome completo deve ter no máximo 100 caracteres.');
+        return;
+      }
+
+      if (phoneDigits.length < 10 || phoneDigits.length > 11) {
+        showAlert('Telefone/WhatsApp inválido! Digite o DDD + número (ex: 11987654321, 10 ou 11 dígitos).');
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        showAlert('E-mail inválido! Digite um formato correto, por exemplo: seu@email.com');
+        return;
+      }
+
+      if (password.length < 4) {
+        showAlert('A senha deve ter no mínimo 4 caracteres.');
+        return;
+      }
 
       const users = getAllRegisteredUsers();
       if (users.some(u => u.email.toLowerCase() === email)) {
@@ -631,10 +705,14 @@
         return;
       }
 
+      const formattedPhone = phoneDigits.length === 11
+        ? `(${phoneDigits.slice(0, 2)}) ${phoneDigits.slice(2, 7)}-${phoneDigits.slice(7)}`
+        : `(${phoneDigits.slice(0, 2)}) ${phoneDigits.slice(2, 6)}-${phoneDigits.slice(6)}`;
+
       const newUser = {
         id: 'usr_' + Date.now(),
         name,
-        phone,
+        phone: formattedPhone,
         email,
         password,
         role: email === ADMIN_EMAIL.toLowerCase() ? 'ADMIN' : 'USER',
@@ -963,16 +1041,47 @@
     // Salvar Dados
     function saveAppointment(e) {
       e.preventDefault();
+      const title = document.getElementById('apt-title').value.trim();
+      const date = document.getElementById('apt-date').value;
+      const start_time = document.getElementById('apt-start').value;
+      const end_time = document.getElementById('apt-end').value;
+      const status = document.getElementById('apt-status').value;
+      const client_name = document.getElementById('apt-client-name').value.trim();
+      const client_phone = document.getElementById('apt-client-phone').value.trim();
+      const location = document.getElementById('apt-location').value.trim();
+
+      if (!title) {
+        alert('Informe o título do compromisso.');
+        return;
+      }
+      if (title.length > 100) {
+        alert('O título deve ter no máximo 100 caracteres.');
+        return;
+      }
+
+      if (start_time && end_time && start_time > end_time) {
+        alert('A hora de término não pode ser anterior à hora de início.');
+        return;
+      }
+
+      if (client_phone) {
+        const digits = client_phone.replace(/\D/g, '');
+        if (digits.length < 10 || digits.length > 11) {
+          alert('WhatsApp do cliente inválido. Digite o DDD + número (10 ou 11 dígitos).');
+          return;
+        }
+      }
+
       const newApt = {
         id: Date.now().toString(),
-        title: document.getElementById('apt-title').value,
-        date: document.getElementById('apt-date').value,
-        start_time: document.getElementById('apt-start').value,
-        end_time: document.getElementById('apt-end').value,
-        status: document.getElementById('apt-status').value,
-        client_name: document.getElementById('apt-client-name').value,
-        client_phone: document.getElementById('apt-client-phone').value,
-        location: document.getElementById('apt-location').value
+        title: title.slice(0, 100),
+        date,
+        start_time,
+        end_time,
+        status,
+        client_name: client_name.slice(0, 100),
+        client_phone,
+        location: location.slice(0, 150)
       };
       appointments.push(newApt);
       closeModal('modal-appointment');
@@ -981,9 +1090,14 @@
 
     function saveTask(e) {
       e.preventDefault();
+      const title = document.getElementById('task-title').value.trim();
+      if (!title) {
+        alert('Descreva o que precisa ser feito.');
+        return;
+      }
       tasks.push({
         id: Date.now().toString(),
-        title: document.getElementById('task-title').value,
+        title: title.slice(0, 100),
         due_date: document.getElementById('task-due').value || getToday(),
         priority: document.getElementById('task-priority').value,
         completed: false
@@ -994,12 +1108,39 @@
 
     function saveClient(e) {
       e.preventDefault();
+      const name = document.getElementById('client-name').value.trim();
+      const phone = document.getElementById('client-phone').value.trim();
+      const email = document.getElementById('client-email').value.trim().toLowerCase();
+      const notes = document.getElementById('client-notes').value.trim();
+
+      if (!name) {
+        alert('Informe o nome do cliente.');
+        return;
+      }
+      if (name.length > 100) {
+        alert('O nome deve ter no máximo 100 caracteres.');
+        return;
+      }
+
+      if (phone) {
+        const digits = phone.replace(/\D/g, '');
+        if (digits.length < 10 || digits.length > 11) {
+          alert('Telefone/WhatsApp inválido. Digite o DDD + número (10 ou 11 dígitos).');
+          return;
+        }
+      }
+
+      if (email && !isValidEmail(email)) {
+        alert('Formato de e-mail inválido. Por favor, revise o endereço digitado.');
+        return;
+      }
+
       clients.push({
         id: Date.now().toString(),
-        name: document.getElementById('client-name').value,
-        phone: document.getElementById('client-phone').value || '',
-        email: document.getElementById('client-email').value || '',
-        notes: document.getElementById('client-notes').value || '',
+        name: name.slice(0, 100),
+        phone,
+        email: email.slice(0, 100),
+        notes: notes.slice(0, 300),
         created_at: new Date().toISOString()
       });
       closeModal('modal-client');
